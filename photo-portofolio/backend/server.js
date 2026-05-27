@@ -4,6 +4,9 @@ const path = require('path');
 const Database = require('better-sqlite3');
 
 const app = express();
+// Добавь сразу после const app = express();
+console.log('Текущая папка:', __dirname);
+console.log('Ищу фронтенд:', path.join(__dirname, '../frontend'));
 const PORT = process.env.PORT || 3000;
 
 const db = new Database('/tmp/messages.db');
