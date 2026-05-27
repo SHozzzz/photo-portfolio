@@ -25,10 +25,10 @@ app.use(cors());
 app.use(express.json());
 
 // Раздаём фронтенд
-app.use(express.static(path.join(__dirname, '../frontend')));
+app.use(express.static(path.join(__dirname, 'frontend')));
 
 app.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname, '../frontend/index.html'));
+  res.sendFile(path.join(__dirname, 'frontend/index.html'));
 });
 
 app.post('/contact', function(req, res) {
