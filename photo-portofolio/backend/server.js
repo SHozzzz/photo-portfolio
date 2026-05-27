@@ -6,7 +6,7 @@ const Database = require('better-sqlite3');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const db = new Database('messages.db');
+const db = new Database('/tmp/messages.db');
 
 db.exec(`
   CREATE TABLE IF NOT EXISTS messages (
