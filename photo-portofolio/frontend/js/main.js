@@ -29,7 +29,7 @@ if (lightbox) {
 const contactForm = document.getElementById('contactForm');
 
 if (contactForm) {
-  contactForm.addEventListener('submit', function(event) {
+  contactForm.addEventListener('submit', async function(event) {
     event.preventDefault();
 
     const name = document.getElementById('name').value.trim();
@@ -40,10 +40,26 @@ if (contactForm) {
     if (name === '' || email === '' || message === '') {
       status.style.color = 'red';
       status.textContent = 'Пожалуйста, заполните все поля.';
-    } else {
+      return;
+    }
+
+    // Отправляем данные на сервер
+    try {
+      const response = await fetch('http://localhost:3000/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, message })
+      });
+
+      const data = await response.json();
+
       status.style.color = 'green';
-      status.textContent = 'Спасибо! Я свяжусь с вами в ближайшее время.';
+      status.textContent = data.message;
       contactForm.reset();
+
+    } catch (error) {
+      status.style.color = 'red';
+      status.textContent = 'Ошибка соединения с сервером.';
     }
   });
 }
